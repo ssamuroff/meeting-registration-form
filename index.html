@@ -91,8 +91,8 @@ body {
 <body>
 
   <div class="container">
-  <h2>Registration for the CMU DESC meeting</h2>
-  The registration fee for the collaboration meeting is <u><i>$55</i></u> with an optional conference dinner for an additional <u><i>$50</i></u> per person.
+  <h2>Registration for the DES Y3KP Workshop at CMU, July 2018</h2>
+  The registration for this workshop is free! Please enter your details below.
   <br>
   <br>
   <form action="" method="POST" id="main_form">
@@ -120,16 +120,13 @@ body {
       <input type="text" class="form-control" name="affiliation" id="affili" placeholder="Affiliation" maxlength="100" required>
       <div class="invalid-feedback">Please provide your affiliation.</div>
     </div>
-
     <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="contact" name="contact">
-        <label class="form-check-label" for="contact">
-          Check if you do NOT wish to be considered for the role of a
-          <a href="http://lsstdesc.org/sites/default/files/LSST_DESC_Professional_Conduct.pdf#page=11" target="_blank">Meeting Contact Person</a>.
-         </label>
-       </div>
-      </div>
+      <label for="inter">Main Scientific Interests</label>
+      <input type="text" class="form-control" name="interests" id="inter" placeholder="Interests" maxlength="100" required>
+      <div class="invalid-feedback">Please provide your main scientific interests within DES.</div>
+    </div>
+
+
 
     <div class="form-group">
       <div class="form-check">
@@ -176,7 +173,7 @@ body {
             <span id="pronoun-s"></span>
           </div>
           <div id="event-d">
-            <span id="event-s">Collaboration Meeting, July 23-27, 2018 </span>
+            <span id="event-s">Dark Energy Survey Y3KP Workshop, July 16-20, 2018 </span>
           </div>
           <div id="location-d">
             <span id="location-s">Carnegie Mellon University</span>
@@ -194,7 +191,7 @@ body {
       <div id="Attendance">
       <div class="form-check form-check-inline" id="inputAttendance">
         <input class="form-check-input" type="checkbox" name="attend_mon" id="attend_mon">
-        <label class="form-check-label" for="attend_mon">Monday (DE School)</label>
+        <label class="form-check-label" for="attend_mon">Monday</label>
       </div>
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" name="attend_tue" id="attend_tue">
@@ -210,26 +207,9 @@ body {
       </div>
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" name="attend_fri" id="attend_fri">
-        <label class="form-check-label" for="attend_fri">Friday (Hack day)</label>
+        <label class="form-check-label" for="attend_fri">Friday</label>
       </div>
         </div>
-    </div>
-
-    <div class="form-group">
-       <label for="carpooling">Will you be driving a car during the meeting and can help with carpooling?</label>
-        <div class="form-check  " id="carpooling">
-            <input class="form-check-input" type="radio" name="carpool" id="carTrue" value="yes" required>
-            <label class="form-check-label" for="inlineRadio1">Yes</label>
-          </div>
-          <div class="form-check ">
-            <input class="form-check-input" type="radio" name="carpool" id="carFalse" value="no">
-            <label class="form-check-label" for="inlineRadio2">No</label>
-          <div class="invalid-feedback">Please answer this question.</div>
-          </div>
-    </div>
-    <div class="form-group">
-      <label for="dinner_diet">If attending the conference dinner, please indicate any dietary restrictions: </label>
-      <input type="text" class="form-control" id="dinner_diet" name="dinner_diet" maxlength="256" placeholder="optional">
     </div>
 
     <hr>
@@ -306,122 +286,6 @@ body {
 </dl>
   </div>
 </footer>
-  <script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js'></script>
-  <script>
-
-// Eventbrite widget support
-var checkoutCallback = function() {
-
-  // Manually submit form data using Ajax and display confirmation modal
-  $.ajax({
-        type : 'POST',
-        data: $("#main_form").serialize(),
-        url : $("#main_form").attr('action'),
-        success : function(data){
-            $("#confirmation-content").html(data);
-            $("#confirmationModal").modal("show");
-        }
-    });
-};
-
-window.EBWidgets.createWidget({
-    widgetType: 'checkout',
-    eventId: '45044537424',
-    modal: true,
-    modalTriggerElementId: 'eventbrite-widget-modal-trigger-45044537424',
-    onOrderComplete: checkoutCallback
-});
-
-// Validate the form before authorising checkout
-$(function(){
-  document.getElementById("register_button").addEventListener("click", function(event) {
-    var form = document.getElementById("main_form");
-
-    // Custom checks
-    // Check that at least one day is selected
-    if($("#Attendance :input").filter(':checked').length >= 1){
-      $.each($("#Attendance :input"), function(index, obj){
-        obj.setCustomValidity("");
-      });
-    }else{
-      $.each($("#Attendance :input"), function(index, obj){
-        obj.setCustomValidity("Select at least one day");
-      });
-    }
-
-    // If form is not validated, don't trigger the registration
-    if(form.checkValidity() === false){
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    form.classList.add('was-validated');
-}, true);
-});
-
-// Function to disable the form if the backend is unavailable
-  var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-};
-
-var backend = getUrlParameter('backend');
-var secret  = getUrlParameter('secret');
-
-$(function(){
-  // Disable the form if the required info about backend server is missing
-   if((backend === undefined) || (secret === undefined)){
-     $("#main_form :input").prop('disabled', true);
-     $('#backendModal').modal({show: true});
-   }
-   $("#main_form").attr('action', backend+'/register');
-   $("#secret").attr('value', secret);
-});
-
-$("#email").change(function(){
-    $.post(backend+"/check_email",
-            {email: $(this).val(),
-             secret: secret},
-            function(data, status){
-              var d = document.getElementById("email");
-              if (status === "success"){
-                if(data === "Ok"){
-                  d.setCustomValidity("");
-                  d.classList.remove('is-invalid');
-                }else{
-                  d.setCustomValidity("Already registered.");
-                  d.classList.add('is-invalid');
-                }
-              }else{
-                  // Server is unavailable...
-                  // make sure we don't block the form at this stage
-                  d.setCustomValidity("");
-                  d.classList.remove('is-invalid');
-                }
-              console.log("Data: " + data + "\nStatus: " + status);
-            });
-});
-
-$("input").keyup(function() {
-  var target = $("#" + $(this).attr("id") + "-s");
-  target.text($(this).val());
-  target.css("font-size", "100%");
-  var badge = $("#badge");
-  var scale = badge.width() / target.width();
-  if (scale < 1) target.css("font-size", (scale * 100).toString() + "%");
-});
-</script>
 
 </body>
 
